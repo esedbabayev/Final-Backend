@@ -66,7 +66,7 @@ export const login = async (request, response) => {
         email: checkExistingUser.email,
       },
       "CLIENT_SECRET_KEY",
-      { expiresIn: "60m" }
+      { expiresIn: "15d" }
     );
 
     response.cookie("token", token, { httpOnly: true, secure: false }).json({
