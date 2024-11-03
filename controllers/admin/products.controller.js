@@ -56,7 +56,7 @@ export const addProduct = async (request, response) => {
     response.status(201).json({
       success: true,
       data: newProduct,
-      message: "Product created successfully",
+      message: "Product added successfully",
     });
   } catch (error) {
     console.log(error);
