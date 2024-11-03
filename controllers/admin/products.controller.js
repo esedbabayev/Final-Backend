@@ -71,6 +71,9 @@ export const addProduct = async (request, response) => {
 
 export const getAllProducts = async (request, response) => {
   try {
+    const allProducts = Product.find({});
+    response.status(200).json({ success: true, data: allProducts });
+    
   } catch (error) {
     console.log(error);
     response.status(500).json({
