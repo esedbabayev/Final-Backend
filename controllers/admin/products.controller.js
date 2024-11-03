@@ -92,7 +92,7 @@ export const editProduct = async (request, response) => {
     if (!editedProduct)
       return response.status(404).json({
         success: false,
-        message: "Product doesn't exists",
+        message: "Product not found",
       });
 
     response.status(200).json({
@@ -113,7 +113,18 @@ export const editProduct = async (request, response) => {
 export const deleteProduct = async (request, response) => {
   try {
     const { id } = request.params;
-    const produuct = await Product.findByIdAndDelete(id);
+    const productToBeDeleted = await Product.findByIdAndDelete(id);
+
+    if (!productToBeDeleted)
+      return response.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+
+    response.status(200).json({
+      success: true,
+      message: "Product deleted successfully",
+    });
   } catch (error) {
     console.log(error);
     response.status(500).json({
