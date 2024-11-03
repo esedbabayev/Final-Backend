@@ -70,7 +70,7 @@ export const addProduct = async (request, response) => {
 // Get all products
 export const getAllProducts = async (request, response) => {
   try {
-    const allProducts = Product.find({});
+    const allProducts = await Product.find({});
     response.status(200).json({ success: true, data: allProducts });
   } catch (error) {
     console.log(error);
