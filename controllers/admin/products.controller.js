@@ -84,40 +84,20 @@ export const getAllProducts = async (request, response) => {
 // Edit product
 export const editProduct = async (request, response) => {
   try {
-    const { id } = request.params;
-    const {
-      image,
-      title,
-      description,
-      category,
-      brand,
-      price,
-      salePrice,
-      totalStock,
-      averageReview,
-    } = request.body;
-
-    const getProduct = await Product.findById(id);
-    if (!getProduct)
+    const editedProduct = await Product.findByIdAndUpdate(
+      request.params.id,
+      request.body,
+      { new: true }
+    );
+    if (!editedProduct)
       return response.status(404).json({
         success: false,
         message: "Product doesn't exists",
       });
 
-    getProduct.title = title || getProduct.title;
-    getProduct.description = description || getProduct.description;
-    getProduct.category = category || getProduct.category;
-    getProduct.brand = brand || getProduct.brand;
-    getProduct.price = price || getProduct.price;
-    getProduct.salePrice = salePrice || getProduct.salePrice;
-    getProduct.totalStock = totalStock || getProduct.totalStock;
-    getProduct.image = image || getProduct.image;
-
-    await getProduct.save();
-
     response.status(200).json({
       success: true,
-      data: getProduct,
+      data: editedProduct,
       message: "Product edited successfully",
     });
   } catch (error) {
@@ -132,6 +112,8 @@ export const editProduct = async (request, response) => {
 // Delete product
 export const deleteProduct = async (request, response) => {
   try {
+    const { id } = request.params;
+    const produuct = await Product.findByIdAndDelete(id);
   } catch (error) {
     console.log(error);
     response.status(500).json({
