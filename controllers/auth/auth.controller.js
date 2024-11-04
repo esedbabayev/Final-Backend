@@ -64,6 +64,7 @@ export const login = async (request, response) => {
         id: checkExistingUser._id,
         role: checkExistingUser.role,
         email: checkExistingUser.email,
+        userName: checkExistingUser.userName,
       },
       "CLIENT_SECRET_KEY",
       { expiresIn: "15d" }
@@ -76,6 +77,7 @@ export const login = async (request, response) => {
         id: checkExistingUser._id,
         role: checkExistingUser.role,
         email: checkExistingUser.email,
+        userName: checkExistingUser.userName,
       },
     });
   } catch (error) {
