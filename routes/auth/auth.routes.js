@@ -16,12 +16,12 @@ router.post("/sign-up", signUp);
 router.post("/sign-in", login);
 router.post("/logout", logout);
 router.get("/check-auth", authMiddleware, (request, response) => {
-    const user = request.user
-    response.status(200).json({
-        success: true,
-        message: "Authentication granted",
-        user
-    })
-})
+  const user = request.user;
+  response.status(200).json({
+    success: true,
+    message: "Authentication granted",
+    user,
+  });
+});
 
 export default router;
