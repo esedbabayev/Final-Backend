@@ -6,6 +6,7 @@ import cors from "cors";
 // Routes
 import AuthRouter from "./routes/auth/auth.routes.js";
 import AdminProductsRouter from "./routes/admin/products.routes.js";
+import UserProductsRouter from "./routes/user/products.routes.js"
 
 // DB connection
 import { connectToDb } from "./config/connect.js";
@@ -27,6 +28,7 @@ server.use(cookieParser());
 // Use routes
 server.use("/api/auth", AuthRouter);
 server.use("/api/admin/products", AdminProductsRouter);
+server.use("/api/shop/products", UserProductsRouter);
 
 dotenv.config();
 
