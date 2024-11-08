@@ -39,7 +39,7 @@ export const getFilteredProducts = async (request, response) => {
         break;
     }
 
-    const filteredProducts = await Product.find({});
+    const filteredProducts = await Product.find(filters).sort(sort);
 
     response.status(200).json({
       success: true,
