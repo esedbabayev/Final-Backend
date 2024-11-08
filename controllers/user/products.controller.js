@@ -53,3 +53,27 @@ export const getFilteredProducts = async (request, response) => {
     });
   }
 };
+
+export const getProductById = async (request, response) => {
+  try {
+    const { id } = request.params;
+    const product = await Product.findById(id);
+
+    if (!product) {
+      return response
+        .status(404)
+        .json({ success: false, message: "Product not found" });
+    }
+
+    response.status(200).json({
+      success: true,
+      data: product,
+    });
+  } catch (error) {
+    console.log(error);
+    response.status(500).json({
+      success: false,
+      message: "An error occured",
+    });
+  }
+};
