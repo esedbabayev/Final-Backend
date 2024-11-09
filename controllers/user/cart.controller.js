@@ -50,6 +50,7 @@ export const addToCart = async (request, response) => {
     });
   }
 };
+
 export const getCartItems = async (request, response) => {
   try {
     const { userId } = request.params;
@@ -87,12 +88,10 @@ export const getCartItems = async (request, response) => {
       quantity: item.quantity,
     }));
 
-    response
-      .status(200)
-      .json({
-        success: true,
-        data: { ...cart._doc, items: populateCartItems },
-      });
+    response.status(200).json({
+      success: true,
+      data: { ...cart._doc, items: populateCartItems },
+    });
   } catch (error) {
     console.log(error);
     response.status(500).json({
@@ -101,8 +100,57 @@ export const getCartItems = async (request, response) => {
     });
   }
 };
+
 export const updateCartItemQuantity = async (request, response) => {
   try {
+    const { userId, productId, quantity } = request.body;
+
+    if (!userId || !productId || quantity <= 0) {
+      return response
+        .status(400)
+        .json({ success: false, message: "Invalid data provided" });
+    }
+
+    const cart = await Cart.findOne({ userId });
+
+    if (!cart) {
+      return response
+        .status(404)
+        .json({ success: false, message: "Cart not found" });
+    }
+
+    const findCurrentProductIndex = cart.items.findIndex(
+      (item) => item.productId.toString() === productId
+    );
+
+    if (findCurrentProductIndex === -1) {
+      return response
+        .status(404)
+        .json({ success: false, message: "Cart item not found" });
+    }
+
+    cart.items[findCurrentProductIndex].quantity += quantity; // = quantity
+
+    await cart.save();
+
+    await cart.populate({
+      path: "items.productId",
+      select: "image title price salePrice",
+    });
+
+    const populateCartItems = cart.items.map((item) => ({
+      productId: item.productId ? item.productId._id : null,
+      image: item.image ? item.productId.image : null,
+      title: item.title ? item.productId.title : "Product not found",
+      price: item.price ? item.productId.price : null,
+      salePrice: item.salePrice ? item.productId.salePrice : null,
+      quantity: item.quantity,
+    }));
+
+    response.status(200).json({
+      success: true,
+      data: { ...cart._doc, items: populateCartItems },
+    });
   } catch (error) {
     console.log(error);
     response.status(500).json({
@@ -111,6 +159,7 @@ export const updateCartItemQuantity = async (request, response) => {
     });
   }
 };
+
 export const removeFromCart = async (request, response) => {
   try {
   } catch (error) {
