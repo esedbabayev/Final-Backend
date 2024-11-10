@@ -62,7 +62,7 @@ export const getCartItems = async (request, response) => {
     }
 
     const cart = await Cart.findOne({ userId }).populate({
-      path: "item.productId",
+      path: "items.productId",
       select: "image title price salePrice",
     });
 
@@ -171,7 +171,7 @@ export const removeFromCart = async (request, response) => {
     }
 
     const cart = await Cart.findOne({ userId }).populate({
-      path: "item.productId",
+      path: "items.productId",
       select: "image title price salePrice",
     });
 
@@ -189,7 +189,7 @@ export const removeFromCart = async (request, response) => {
     await cart.save();
 
     await Cart.populate({
-      path: "item.productId",
+      path: "items.productId",
       select: "image title price salePrice",
     });
 
