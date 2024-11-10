@@ -183,12 +183,12 @@ export const removeFromCart = async (request, response) => {
     }
 
     cart.items = cart.items.filter(
-      (item) => item.productId._id.toString() !== productId
+      (item) => item.productId && item.productId._id.toString() !== productId
     );
 
     await cart.save();
 
-    await Cart.populate({
+    await cart.populate({
       path: "items.productId",
       select: "image title price salePrice",
     });
@@ -207,10 +207,10 @@ export const removeFromCart = async (request, response) => {
       data: { ...cart._doc, items: populateCartItems },
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     response.status(500).json({
       success: false,
-      message: "An error occured",
+      message: "An error occurred",
     });
   }
 };
