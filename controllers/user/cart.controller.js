@@ -129,7 +129,7 @@ export const updateCartItemQuantity = async (request, response) => {
         .json({ success: false, message: "Cart item not found" });
     }
 
-    cart.items[findCurrentProductIndex].quantity += quantity; // = quantity
+    cart.items[findCurrentProductIndex].quantity = quantity; // = quantity
 
     await cart.save();
 
