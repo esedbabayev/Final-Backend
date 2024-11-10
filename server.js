@@ -6,7 +6,8 @@ import cors from "cors";
 // Routes
 import AuthRouter from "./routes/auth/auth.routes.js";
 import AdminProductsRouter from "./routes/admin/products.routes.js";
-import UserProductsRouter from "./routes/user/products.routes.js"
+import UserProductsRouter from "./routes/user/products.routes.js";
+import CartRouter from "./routes/user/cart.routes.js";
 
 // DB connection
 import { connectToDb } from "./config/connect.js";
@@ -29,6 +30,7 @@ server.use(cookieParser());
 server.use("/api/auth", AuthRouter);
 server.use("/api/admin/products", AdminProductsRouter);
 server.use("/api/shop/products", UserProductsRouter);
+server.use("/api/shop/cart", CartRouter);
 
 dotenv.config();
 
