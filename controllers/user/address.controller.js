@@ -46,7 +46,7 @@ export const getAllAddresses = async (request, response) => {
         .json({ success: false, message: "User ID is required" });
     }
 
-    const address = Address.find({ userId });
+    const address = await Address.find({ userId });
 
     response.status(200).json({
       success: true,
@@ -72,7 +72,7 @@ export const editAddress = async (request, response) => {
         .json({ success: false, message: "User and address IDs are required" });
     }
 
-    const address = Address.findOneAndUpdate(
+    const address = await Address.findOneAndUpdate(
       {
         _id: addressId,
         userId,
