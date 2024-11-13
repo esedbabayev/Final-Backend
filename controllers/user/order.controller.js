@@ -9,7 +9,7 @@ export const createOrder = async (req, res) => {
   try {
     const {
       userId,
-      cartItems, 
+      cartItems,
       addressInfo,
       orderStatus,
       paymentMethod,
