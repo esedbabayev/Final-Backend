@@ -9,7 +9,8 @@ import AdminProductsRouter from "./routes/admin/products.routes.js";
 import UserProductsRouter from "./routes/user/products.routes.js";
 import CartRouter from "./routes/user/cart.routes.js";
 import AddressRouter from "./routes/user/address.routes.js";
-import OrderRouter from "./routes/user/order.routes.js"
+import OrderRouter from "./routes/user/order.routes.js";
+import AdminOrderRouter from "./routes/admin/order.routes.js";
 
 // DB connection
 import { connectToDb } from "./config/connect.js";
@@ -31,6 +32,7 @@ server.use(cookieParser());
 // Use routes
 server.use("/api/auth", AuthRouter);
 server.use("/api/admin/products", AdminProductsRouter);
+server.use("/api/admin/orders", AdminOrderRouter);
 server.use("/api/shop/products", UserProductsRouter);
 server.use("/api/shop/cart", CartRouter);
 server.use("/api/shop/address", AddressRouter);
