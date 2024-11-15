@@ -6,11 +6,12 @@ import cors from "cors";
 // Routes
 import AuthRouter from "./routes/auth/auth.routes.js";
 import AdminProductsRouter from "./routes/admin/products.routes.js";
+import AdminOrderRouter from "./routes/admin/order.routes.js";
 import UserProductsRouter from "./routes/user/products.routes.js";
 import CartRouter from "./routes/user/cart.routes.js";
 import AddressRouter from "./routes/user/address.routes.js";
 import OrderRouter from "./routes/user/order.routes.js";
-import AdminOrderRouter from "./routes/admin/order.routes.js";
+import SearchRouter from "./routes/user/search.routes.js";
 
 // DB connection
 import { connectToDb } from "./config/connect.js";
@@ -37,6 +38,7 @@ server.use("/api/shop/products", UserProductsRouter);
 server.use("/api/shop/cart", CartRouter);
 server.use("/api/shop/address", AddressRouter);
 server.use("/api/shop/order", OrderRouter);
+server.use("/api/shop/search", SearchRouter);
 
 dotenv.config();
 
