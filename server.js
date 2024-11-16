@@ -13,6 +13,7 @@ import AddressRouter from "./routes/user/address.routes.js";
 import OrderRouter from "./routes/user/order.routes.js";
 import SearchRouter from "./routes/user/search.routes.js";
 import ReviewRouter from "./routes/user/review.routes.js";
+import FeatureRouter from "./routes/admin/feature.routes.js";
 
 // DB connection
 import { connectToDb } from "./config/connect.js";
@@ -35,11 +36,13 @@ server.use(cookieParser());
 server.use("/api/auth", AuthRouter);
 server.use("/api/admin/products", AdminProductsRouter);
 server.use("/api/admin/orders", AdminOrderRouter);
+server.use("/api/admin/feature", FeatureRouter);
 server.use("/api/shop/products", UserProductsRouter);
 server.use("/api/shop/cart", CartRouter);
 server.use("/api/shop/address", AddressRouter);
 server.use("/api/shop/order", OrderRouter);
 server.use("/api/shop/search", SearchRouter);
+server.use("/api/shop/review", ReviewRouter);
 server.use("/api/shop/review", ReviewRouter);
 
 dotenv.config();
