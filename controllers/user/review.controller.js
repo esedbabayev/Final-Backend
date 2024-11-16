@@ -21,12 +21,12 @@ export const addReview = async (req, res) => {
       });
     }
 
-    const checkExistinfReview = await Review.findOne({
+    const checkExistingReview = await Review.findOne({
       productId,
       userId,
     });
 
-    if (checkExistinfReview) {
+    if (checkExistingReview) {
       return res.status(400).json({
         success: false,
         message: "You already reviewed this product!",
