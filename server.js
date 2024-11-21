@@ -22,9 +22,11 @@ connectToDb();
 
 const server = express();
 
+dotenv.config();
+
 server.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_BASE_URL,
     credentials: true,
   })
 );
@@ -45,7 +47,6 @@ server.use("/api/shop/search", SearchRouter);
 server.use("/api/shop/review", ReviewRouter);
 server.use("/api/shop/review", ReviewRouter);
 
-dotenv.config();
 
 const PORT = process.env.PORT;
 
